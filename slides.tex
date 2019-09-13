@@ -582,10 +582,6 @@ buildEnv {
 
 %---------------------------------------------------------------------------------------
 
-\setbeamertemplate{background canvas}[default]
-
-%---------------------------------------------------------------------------------------
-
 \section{Nix dockerTools}
 
 %---------------------------------------------------------------------------------------
@@ -609,10 +605,14 @@ dockerTools.buildLayeredImage {
 
 \begin{frame}[fragile]{Nix dockerTools\hfill2/3}
   Image is built with \textbf{nix-build} and loaded to use with \textbf{Docker}.
+  \par
+  \vspace{0.5cm}
   \begin{minted}{bash}
   $ docker load < $(nix-build docker.nix)
   Loaded image: acme:latest
   \end{minted}
+  \par
+  \vspace{0.5cm}
   Calling nix-build results in a new build only if any of the dependencies have changed. Everything gets cached in \texttt{/nix/store} as usual with Nix.
 \end{frame}
 
@@ -707,6 +707,8 @@ in python3Packages.buildPythonApplication {
 \end{frame}
 
 %---------------------------------------------------------------------------------------
+
+\setbeamertemplate{background canvas}[default]
 
 \begin{frame}[standout]
 \vfill
