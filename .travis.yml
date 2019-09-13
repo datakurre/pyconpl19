@@ -1,0 +1,26 @@
+language: nix
+before_install:
+- sudo mkdir -p /etc/nix
+- echo "substituters = https://cache.nixos.org/ https://datakurre.cachix.org/" | sudo
+  tee -a /etc/nix/nix.conf
+- echo "trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
+  datakurre.cachix.org-1:ayZJTy5BDd8K4PW9uc9LHV+WCsdi/fu1ETIYZMooK78=" | sudo tee
+  -a /etc/nix/nix.conf
+script: nix-shell --run "make"
+after_success:
+- mkdir build
+- mv slides.pdf build
+- echo '<meta http-equiv="refresh" content= "0;url=slides.pdf" />' > build/index.html
+- touch build/.nojekyll
+deploy:
+  provider: pages
+  github-token: "$GITHUB_TOKEN"
+  local-dir: "./build"
+  target-branch: gh-pages
+  keep-history: false
+  skip-cleanup: true
+  on:
+    branch: master
+env:
+  global:
+    secure: iLF9P48axqh6xuAvL+UVTF44LAhjela5Y8gxO6oAwWkEXDTMODCQyP8+nyFm1yEUM4E83mLhZJGhTe8AHvZfRw7b5d4xJf9/kCX/LebMwhezuRtOujqklfgNuokdvOHOtn5deMBF3H1THw1jlSNB96KyLBwzuUvrf+WFGfUTpqQzR7TyH6eu0eVPELQu3T2cMVd2Rh7oiZSkTnTPUe+KJ9iiArLqqI8Jw60HL/FSVgOAEHL9kQ/AckeEH8QcLwY6v0d6LkC4d6dyVBJwoCDi4IAqcKGlyP3AW5zFwGQ4+zZArb6bO6xAOC380Tl5Rpek5FI5h2DssyH6uK9KVKT0U+nZWBoAv1/clCP5MtPT73SF3nwjqM41L6SlfS5HVuvEkmTJ6VeP2qdz6aHN7klnO4CPrmXwcQd8WNqlFtK9aPWeYLGg+dbpgbfutskizAjxoUoIFVeuqJTdhU2Ekgpvc1f6X/NytAALslzW/37hGoSYlU0gGoI+fDMf1yx00mFZgLrZHEhXnQMRr2CQzFPYDg9cS5xCy8uvj/9E7fxN4OMg2uUPe9LN3LGysGIgkuLal11X73cES/yVVKbPwJjBoVW91nGr0tHMW9y4WebdV64jkiH1MDezivXa64JAeCMhKIcPwUoD7J88qI4f9Nj4+9cDQVQwEI+9nrCFbvTtUcI=
