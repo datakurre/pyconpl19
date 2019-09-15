@@ -477,7 +477,7 @@ buildEnv {
 %---------------------------------------------------------------------------------------
 
 \begin{frame}[fragile]{Nix-shell as Script Interpreter}
-  \textbf{Nix-shell} can be used as a script interpreter to execute the script with the requirements (\texttt{-p}) and interpreter (\texttt{-i}) defined in the script itself.
+  \textbf{Nix-shell} can be used as a script interpreter to execute a script with the requirements (\texttt{-p}) and interpreter (\texttt{-i}) defined in the script itself.
   \begin{minted}{python}
 #! /usr/bin/env nix-shell
 #! nix-shell -p "python3.withPackages(ps: with ps; [ scikitlearn ])"
