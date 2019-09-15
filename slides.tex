@@ -107,7 +107,7 @@
 #! nix-shell -p "python3.withPackages(ps: with ps; [ exifread ])"
 #! nix-shell -i python3
 from exifread import process_file
-print(process_file(open('image.jpg', 'rb)))
+print(process_file(open('image.jpg', 'rb')))
   \end{minted}
   \textbf{Executes}
   \begin{minted}{bash}
