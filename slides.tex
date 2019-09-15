@@ -1,4 +1,4 @@
-\documentclass[12pt,aspectratio=169]{beamer}
+\documentclass[10pt,aspectratio=169]{beamer}
 
 % Input
 \usepackage[utf8]{inputenc}
@@ -554,11 +554,11 @@ mkShell {
   \begin{minted}{nix}
 with import <nixpkgs> {};
 buildEnv {
-  name = "";
+  name = "env";
   paths = [(python37.withPackages (ps: with ps; [ scikitlearn ]))];
 }
   \end{minted}
-  \textbf{nix-build} can realise the environment into \textbf{output link}.
+  \textbf{nix-build} can realise the environment into an \textbf{output link}.
   \begin{minted}{bash}
   $ nix-build env.nix -o env
   \end{minted}
@@ -613,7 +613,7 @@ dockerTools.buildLayeredImage {
   \end{minted}
   \par
   \vspace{0.5cm}
-  Calling nix-build results in a new build only if any of the dependencies have changed. Everything gets cached in \texttt{/nix/store} as usual with Nix.
+  Calling nix-build results in a new build only if any of the dependencies\\have changed. Everything gets cached in \texttt{/nix/store} as usual with Nix.
 \end{frame}
 
 %---------------------------------------------------------------------------------------
@@ -651,6 +651,7 @@ python3Packages.buildPythonApplication {
   src = lib.cleanSource ./.;
 # nativeBuildInputs = [];
 # checkInputs = [];
+# buildInputs = [];
 # propagatedBuildInputs = [];
 }
   \end{minted}
